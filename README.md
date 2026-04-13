@@ -1,3 +1,11 @@
+---
+title: Crystalytics
+emoji: 💎
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+---
 # CrystalAI
 
 **Deployment Engine:** Configured automatically for [Hugging Face Docker Spaces](https://huggingface.co/spaces).
