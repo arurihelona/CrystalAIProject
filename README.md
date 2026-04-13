@@ -31,7 +31,7 @@ CrystalAI is a polished full-stack web application designed for cutting-edge cry
 
 CrystalAI relies on a unified multi-stage Docker build, simplifying deployments significantly. 
 
-1. Ensure the PyTorch models are trained. If `backend/models` is empty, run `python train_cgcnn_models.py` inside the backend directory.
+1. Ensure the PyTorch models and Classic ML models are trained. If `backend/models` is empty, run `python train_cgcnn_models.py` and `python train_models.py` inside the `backend` directory.
 2. Build the combined Docker image from the project root:
    ```bash
    docker build -t crystalai .
@@ -58,7 +58,8 @@ cd backend
 python -m venv .venv
 # Activate virtual environment (.venv\Scripts\activate on Windows)
 pip install -r requirements.txt
-python train_cgcnn_models.py  # Only necessary if you need to retrain PyTorch checkpoints
+python train_cgcnn_models.py  # Train PyTorch checkpoints (CGCNN)
+python train_models.py        # Train the classic ML regressors (Random Forest backup)
 uvicorn app.main:app --reload
 ```
 *The API will start at http://127.0.0.1:8000*
