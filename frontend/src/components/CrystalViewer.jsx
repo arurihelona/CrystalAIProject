@@ -16,6 +16,9 @@ function colorForElement(element) {
 
 export default function CrystalViewer({ crystal }) {
   const mountRef = useRef(null);
+  const uniqueElements = Array.from(
+    new Set((crystal?.atoms ?? []).map((atom) => atom.element)),
+  ).sort();
 
   useEffect(() => {
     if (!mountRef.current || !crystal) {
@@ -117,5 +120,23 @@ export default function CrystalViewer({ crystal }) {
     };
   }, [crystal]);
 
-  return <div className="viewer-canvas" ref={mountRef} />;
+  return (
+    <div className="viewer-wrap">
+      <div className="viewer-canvas" ref={mountRef} />
+      {uniqueElements.length > 0 ? (
+        <div className="viewer-legend" aria-label="Atom color legend">
+          {uniqueElements.map((element) => (
+            <span className="viewer-legend-item" key={element}>
+              <span
+                className="viewer-legend-swatch"
+                style={{ backgroundColor: colorForElement(element) }}
+                aria-hidden="true"
+              />
+              {element}
+            </span>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
 }
